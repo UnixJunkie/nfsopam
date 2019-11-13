@@ -1,4 +1,4 @@
-#!/bin/bash
+#! /bin/env bash
 
 # make opam usable (faster) even if your $OPAMROOT is on top of NFS
 # by using /tmp (usually a local disk) for most operations
