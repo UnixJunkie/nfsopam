@@ -8,7 +8,7 @@ set -x # debug
 # sync ~/.opam to local disk
 opam clean
 tmp_dot_opam=/tmp/${USER}_dot_opam
-rsync -q ~/.opam/* $tmp_dot_opam
+rsync -qa ~/.opam/ $tmp_dot_opam
 mv -f ~/.opam ~/.opam.old
 
 # use it
@@ -21,4 +21,4 @@ opam "$@"
 opam clean
 \rm ~/.opam
 mv ~/.opam.old ~/.opam
-rsync -q $tmp_dot_opam/* ~/.opam
+rsync -qa $tmp_dot_opam/ ~/.opam
