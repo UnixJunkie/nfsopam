@@ -5,17 +5,8 @@
 
 #set -x # debug
 
-# determine the $OPAMROOT
-for i in $(seq $#); do
-    case ${!i} in
-	--root=*)
-	    OPAMROOT=${!i#*=};;
-	--root)
-	    (( i += 1 ))
-	    OPAMROOT=${!i};;
-    esac
-done
-OPAMROOT=${OPAMROOT:-$HOME/.opam}
+# determine the opam's root
+OPAMROOT=${OPAMROOT:-$HOME/.opam} # env. var. or default
 
 # sync $OPAMROOT to local disk
 opam clean
