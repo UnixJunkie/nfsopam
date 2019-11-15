@@ -3,7 +3,7 @@
 # make opam usable (faster) even if your $OPAMROOT is on top of NFS
 # by using /tmp (usually a local disk) for most operations
 
-set -x # debug
+#set -x # debug
 
 # determine the $OPAMROOT
 for i in $(seq $#); do
@@ -20,7 +20,8 @@ OPAMROOT=${OPAMROOT:-$HOME/.opam}
 # sync $OPAMROOT to local disk
 opam clean
 tmp_dot_opam=/tmp/${USER}_dot_opam
-rsync -qa $OPAMROOT/ $tmp_dot_opam
+echo "nfsopam: rsync to /tmp ..."
+rsync -a --info=progress2 $OPAMROOT/ $tmp_dot_opam
 mv -f $OPAMROOT $OPAMROOT.old
 
 # use it
@@ -33,4 +34,5 @@ opam "$@"
 opam clean
 \rm $OPAMROOT
 mv $OPAMROOT.old $OPAMROOT
-rsync -qa $tmp_dot_opam/ $OPAMROOT
+echo "nfsopam: rsync from /tmp..."
+rsync -a --info=progress2 $tmp_dot_opam/ $OPAMROOT
